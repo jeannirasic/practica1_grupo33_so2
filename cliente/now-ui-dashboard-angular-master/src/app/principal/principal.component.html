@@ -1,0 +1,90 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="title" align="center">Página principal</h2>
+        </div>
+        <div class="card-body">
+          <h4>Resumen general</h4>
+          <div class="table">
+            <table class="table">
+              <thead class=" text-primary">
+                <th>Procesos en ejecución</th>
+                <th>Procesos suspendidos</th>
+                <th>Procesos detenidos</th>
+                <th>Procesos Zombie</th>
+                <th>Total de procesos</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{resumen.ejecucion}}</td>
+                  <td>{{resumen.suspendidos}}</td>
+                  <td>{{resumen.detenidos}}</td>
+                  <td>{{resumen.zombie}}</td>
+                  <td>{{resumen.total}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <br/>          
+          <h4>Listado de procesos </h4>
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+          </mat-form-field>
+          
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+          
+              <ng-container matColumnDef="pid">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> PID </th>
+                <td mat-cell *matCellDef="let row"> {{row.pid}} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="usuario">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
+                <td mat-cell *matCellDef="let row"> {{row.usuario}} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="estado">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                <td mat-cell *matCellDef="let row"> {{row.estado}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="ram" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header > %RAM </th>
+                <td mat-cell *matCellDef="let row" > {{row.porcentajeram}}% </td>
+              </ng-container>
+
+              <ng-container matColumnDef="accion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Acción </th>
+                <td mat-cell *matCellDef="let row"><button type="button" class="btn btn-danger" *ngIf="row.booleano" (click)="terminar(row)">Kill</button></td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+              </tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+
+          <br/>          
+          <h4>Árbol de procesos</h4>
+          <div id="sample">
+            <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; width: 100%; height: 550px"></div>
+          </div>
+          <br/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

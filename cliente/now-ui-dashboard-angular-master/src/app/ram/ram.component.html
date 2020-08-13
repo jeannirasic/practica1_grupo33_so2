@@ -1,0 +1,33 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="title" align="center">Monitor de RAM</h2>
+        </div>
+        <div class="card-body">
+          <hr/>
+          <h3 class="card-subtitle mb-2 text-muted">Total de memoria RAM del servidor: {{ram.total}} MB</h3>
+          <h3 class="card-subtitle mb-2 text-muted">Total de memoria RAM consumida: {{ram.consumida}} MB</h3>
+          <h3 class="card-subtitle mb-2 text-muted">Porcentaje de consumo de RAM : {{ram.porcentaje}}%</h3>
+          <hr/>
+          <h4>Gráfica de consumo de RAM</h4>
+          <div class="panel-header panel-header-lg">
+            <canvas
+              baseChart
+              id="bigDashboardChart"
+              [datasets]="lineBigDashboardChartData"
+              [labels]="lineBigDashboardChartLabels"
+              [colors]="lineBigDashboardChartColors"
+              [options]="lineBigDashboardChartOptions"
+              [chartType]="lineBigDashboardChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+            ></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
