@@ -7,12 +7,12 @@ export interface Resumen {
 }
 
 export interface Procesos {
-    pid: number;
-    nombre: string;
-    usuario: string;
-    estado: string;
-    porcentajeram: number;
-    ppid: number;
+    PID: number;
+    Nombre: string;
+    Usuario: string;
+    Estado: string;
+    PorcentajeRam: number;
+    PPID: number;
     booleano?: boolean;
 }
 
@@ -23,11 +23,8 @@ export interface ProcesoArbol {
 }
 
 export interface Ram {
-    total: number;
-    consumida: number;
-    porcentaje: number;
+    Memoria_Total: number;
+    Memoria_en_uso: number;
+    Porcentaje_en_uso: number;
 }
 
-export interface Cpu {
-    porcentaje: number;
-}

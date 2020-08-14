@@ -14,7 +14,7 @@ export class RamComponent implements OnInit {
   private subscription: Subscription;
   @Output() TimerExpired: EventEmitter<any> = new EventEmitter<any>();
   @Input() SearchDate: moment.Moment = moment();
-  @Input() ElapsTime = 1;
+  @Input() ElapsTime = 3;
   searchEndDate: moment.Moment;
   remainingTime: number;
   minutes: number;
@@ -88,7 +88,7 @@ export class RamComponent implements OnInit {
   actualizar() {
     this.servicio.informacionRam().subscribe(data => {
       this.ram = data;
-      this.datosGrafica.push(data.porcentaje);
+      this.datosGrafica.push(data.Porcentaje_en_uso);
       this.labelsGrafica.push(this.timeGenerate());
       this.grafica();
     });

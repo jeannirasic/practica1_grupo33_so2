@@ -19,7 +19,7 @@ export class PrincipalComponent implements OnInit {
   private subscription: Subscription;
   @Output() TimerExpired: EventEmitter<any> = new EventEmitter<any>();
   @Input() SearchDate: moment.Moment = moment();
-  @Input() ElapsTime = 5;
+  @Input() ElapsTime = 3;
   searchEndDate: moment.Moment;
   remainingTime: number;
   minutes: number;
@@ -31,7 +31,7 @@ export class PrincipalComponent implements OnInit {
   resumen: Resumen = {total: 0, ejecucion: 0, suspendidos: 0, detenidos: 0, zombie: 0};
   listaProcesos: Procesos[] = new Array();
   nodeDataArray: ProcesoArbol[] = new Array();
-  displayedColumns: string[] = ['pid', 'nombre', 'usuario', 'estado', 'ram', 'accion'];
+  displayedColumns: string[] = ['pid', 'nombre', 'usuario', 'estado', 'ram', 'ppid', 'accion'];
   dataSource: MatTableDataSource<Procesos>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -68,7 +68,7 @@ export class PrincipalComponent implements OnInit {
   actualizarDatos() {
     this.servicio.informacionPrincipal().subscribe(data => {
       for (let i = 0; i < data.length; i++) {
-        if (data[i].estado === 'T') {
+        if (data[i].Estado === 'STOPPED') {
           data[i].booleano = false;
         } else {
           data[i].booleano = true;
@@ -83,9 +83,9 @@ export class PrincipalComponent implements OnInit {
       this.nodeDataArray = new Array();
       for (let i = 0; i < data.length; i++) {
         const nuevo: ProcesoArbol = {
-          key: data[i].pid,
-          name: 'PID: ' + data[i].pid + ', \n Nombre: ' + data[i].nombre,
-          parent: data[i].ppid
+          key: data[i].PID,
+          name: 'PID: ' + data[i].PID + ', \n Nombre: ' + data[i].Nombre,
+          parent: data[i].PPID
         };
         this.nodeDataArray.push(nuevo);
       }
@@ -94,13 +94,13 @@ export class PrincipalComponent implements OnInit {
       // Reviso lo de las estadisticas generales
       let contadorEjecucion = 0, contadorSuspendidos = 0, contadorDetenidos = 0, contadorZombie = 0;
       for (let i = 0; i < data.length; i++) {
-        if (data[i].estado === 'R') {
+        if (data[i].Estado === 'RUNNING') {
           contadorEjecucion++;
-        } else if (data[i].estado === 'S') {
+        } else if (data[i].Estado === 'INTERRUPTIBLE') {
           contadorSuspendidos++;
-        } else if (data[i].estado === 'T') {
+        } else if (data[i].Estado === 'STOPPED') {
           contadorDetenidos++;
-        } else if (data[i].estado === 'Z') {
+        } else if (data[i].Estado === 'ZOMBIE') {
           contadorZombie++;
         }
       }

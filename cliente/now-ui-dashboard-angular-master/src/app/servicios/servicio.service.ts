@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Resumen, Procesos, Ram, Cpu } from '../interfaces';
+import { Resumen, Procesos, Ram } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +13,12 @@ export class ServicioService {
 
   // La informacion de los procesos
   informacionPrincipal() {
-    return this.http.get<Procesos[]>(this.url + 'principal');
+    return this.http.get<Procesos[]>(this.url + 'procesos');
   }
 
   // Devuelve los datos de la RAM
   informacionRam() {
     return this.http.get<Ram>(this.url + 'ram');
-  }
-
-  // Devuelve la informacion del CPU
-  informacionCpu() {
-    return this.http.get<Cpu>(this.url + 'cpu');
   }
 
   // Envia el pid del proceso para matarlo
