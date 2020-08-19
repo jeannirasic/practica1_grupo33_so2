@@ -39,7 +39,14 @@ type structKill struct {
 	Pid string `json:"pid,omitempty"`
 }
 
+//VARIABLES
+var (
+	tamanio float64 = 0
+)
+
 func main() {
+	//Obtenemos el tamanio
+	leerInicio()
 	//Inicio el codigo del servidor
 	router := mux.NewRouter()
 
@@ -70,10 +77,12 @@ func enviarProcesos(w http.ResponseWriter, req *http.Request) {
 
 	_ = json.Unmarshal([]byte(file), &data)
 
-	/*fmt.Println("Tamanio: ", len(data.StructListaProcesos))
+	//fmt.Println("Tamanio: ", len(data.StructListaProcesos))
 	for i := 0; i < len(data.StructListaProcesos); i++ {
-		fmt.Println("Valor: ", data.StructListaProcesos[i])
-	}*/
+		var temporal float64 = data.StructListaProcesos[i].PorcentajeRam
+		data.StructListaProcesos[i].PorcentajeRam = (temporal / tamanio) * 100
+		//fmt.Println("Valor: ", data.StructListaProcesos[i])
+	}
 
 	json.NewEncoder(w).Encode(data.StructListaProcesos)
 }
@@ -108,4 +117,19 @@ func matarProceso(w http.ResponseWriter, req *http.Request) {
 		fmt.Printf("Error matando el proceso: %v", err)
 	}
 	json.NewEncoder(w).Encode(valor)
+}
+
+//FUNCIONES ADICIONALES-------------------------------------------------------------------------------------------------------------------------------
+func leerInicio() {
+	file, _ := ioutil.ReadFile("/proc/mem_grupo33.txt")
+
+	data := StructListaRam{}
+
+	_ = json.Unmarshal([]byte(file), &data)
+
+	tamanio = float64(data.StructListaRam[0].Memoria_Total)
+	/*fmt.Println("Tamanio: ", tamanio)
+	for i := 0; i < len(data.StructListaRam); i++ {
+		fmt.Println("Valor: ", data.StructListaRam[i])
+	}*/
 }
