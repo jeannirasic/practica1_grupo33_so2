@@ -64,7 +64,7 @@ func inicio(w http.ResponseWriter, req *http.Request) {
 func enviarProcesos(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	file, _ := ioutil.ReadFile("/home/jeannira/Descargas/cpu.txt")
+	file, _ := ioutil.ReadFile("/proc/cpu_grupo33.txt")
 
 	data := StructListaProcesos{}
 
@@ -82,7 +82,7 @@ func enviarProcesos(w http.ResponseWriter, req *http.Request) {
 func informacionRAM(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	file, _ := ioutil.ReadFile("/home/jeannira/Descargas/mem.txt")
+	file, _ := ioutil.ReadFile("/proc/mem_grupo33.txt")
 
 	data := StructListaRam{}
 
