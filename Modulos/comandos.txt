@@ -1,0 +1,31 @@
+
+echo "Sirve para limpiar los archivos creador por el comando 'make all'."
+make clean
+
+echo "Sirve para remover el modulo."
+sudo rmmod mem_grupo33.ko
+
+===========================================================================================================
+===========================================================================================================
+===========================================================================================================
+
+echo "Crea los archivos necesarios. (el que nos importa es el archivo .ko)"
+make all
+
+echo "este comando sirve para insertar el modulo"
+sudo insmod mem_grupo33.ko
+
+echo "Muestra el mensaje al insertar o eliminar el modulo"
+dmesg
+
+======= En una nueva terminal
+
+echo "Ingresamos a la carpeta proc"
+cd /proc
+
+
+echo "Vemos el contenido del archivo. (Se actualiza cada vez que se lee)."
+cat mem_grupo33
+
+echo "este comando sirve para listar los modulos"
+sudo lsmod
