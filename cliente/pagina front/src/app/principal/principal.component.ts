@@ -119,8 +119,8 @@ export class PrincipalComponent implements OnInit {
 
   }
 
-  terminar(e) {
-    this.servicio.matarProceso(e.nombre).subscribe(data => {
+  terminar(proceso: Procesos) {
+    this.servicio.matarProceso(proceso.PID.toString()).subscribe(data => {
       alert('El proceso se ha eliminado existosamente');
     }, error => {
       alert('Hubo un error al eliminar el proceso');
