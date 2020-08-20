@@ -19,7 +19,7 @@ export class PrincipalComponent implements OnInit {
   private subscription: Subscription;
   @Output() TimerExpired: EventEmitter<any> = new EventEmitter<any>();
   @Input() SearchDate: moment.Moment = moment();
-  @Input() ElapsTime = 3;
+  @Input() ElapsTime = 5;
   searchEndDate: moment.Moment;
   remainingTime: number;
   minutes: number;

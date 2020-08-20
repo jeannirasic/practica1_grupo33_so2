@@ -7,7 +7,7 @@ import { Resumen, Procesos, Ram } from '../interfaces';
 })
 export class ServicioService {
 
-  url = 'http://localhost:3000/';
+  url = 'http://backpractica1.tk:3000/';
 
   constructor(private http: HttpClient) { }
 
