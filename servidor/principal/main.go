@@ -112,7 +112,10 @@ func matarProceso(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	var valor structKill
 	valor.Pid = params["id"]
-	_, err := exec.Command("sh", "-c", "sudo -9 kill "+valor.Pid).Output()
+	
+        cmd := exec.Command("sudo -9 kill "+valor.Pid)
+	stdout, err := cmd.Output()
+        //_, err := exec.Command("sh", "-c", "sudo -9 kill "+valor.Pid).Output()
 	if err != nil {
 		fmt.Printf("Error matando el proceso: %v", err)
 	}
