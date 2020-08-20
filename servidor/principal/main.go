@@ -113,7 +113,7 @@ func matarProceso(w http.ResponseWriter, req *http.Request) {
 	var valor structKill
 	valor.Pid = params["id"]
 
-	cmd := exec.Command("sudo", "-9", "kill", valor.Pid)
+	cmd := exec.Command("sudo", "kill", "-9", valor.Pid)
 	_, err := cmd.Output()
 	//_, err := exec.Command("sh", "-c", "sudo -9 kill "+valor.Pid).Output()
 	if err != nil {
