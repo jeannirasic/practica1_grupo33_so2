@@ -1,0 +1,88 @@
+Son 2 usuarios
+Usuario: Grupo33
+Grupo: Grupo33
+
+
+Usuario
+nombre = Grupo33
+contraseña = sopes2020
+
+Grupo
+nombre = Sopes2
+
+=============================================================
+================= COMANDOS PRACTICA 1 SOPES 2 ===============
+=============================================================
+
+============ FORMA CORRECTA ========================
+
+Link de pagina: https://eltallerdelbit.com/usuarios-grupos-linux/
+
+======= CREAR EL GRUPO
+groupadd sopes2
+
+======= CREAR USUARIOS
+useradd -g sopes2 -d /home/Root -m -s /bin/bash Root
+useradd -g sopes2 -d /home/grupo33 -m -s /bin/bash grupo33
+
+======= INGRESAR CONTRASEÑAS
+passwd Root
+passwd grupo33
+
+
+======= VER LOS GID DE LOS GRUPOS
+cat /etc/passwd
+
+======= VER LOS GRUPOS CORRESPONDIENTE A LOS GID's
+cat /etc/group
+
+
+======= LISTAR LOS USUARIOS
+cat /etc/passwd
+
+====== ELIMINAR USUARIO 
+sudo userdel nombreusuario
+
+========== CAMBIAR EL PROPIETARIO DE LA CARPETA Y EL GRUPO AL QUE PERTENECE
+sudo chown -R grupo33:sopes2 ./practica1/
+
+
+========== CAMBIAR DE USUARIO DESDE CONSOLA
+su grupo33
+
+========== VER EN QUE USUARIO ESTOY ACTUALMENTE
+whoami
+
+=========== MUSTRA LA INSTALACION DE LOS HEADERS
+apt search linux-headers-$(uname -r)
+
+=========== COMANDO PARA STRESS
+stress -c 2 -i 1 -m 1 -- vm-bytes 128M -t 10s
+
+===========
+cut -d: -f1 /etc/passwd
+
+===============================================================
+================ INSTALAR GOLANG ==============================
+===============================================================
+
+sudo apt-get update
+sudo apt-get -y upgrade
+
+cd /tmp
+wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz
+
+sudo tar -xvf go1.11.linux-amd64.tar.gz
+sudo mv go /usr/local
+
+
+nano ~/.profile
+
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+--> Ctrl + O luego enter
+--> Ctrl + X
+
+source ~/.profile
