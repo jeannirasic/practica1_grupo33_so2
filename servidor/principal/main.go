@@ -114,7 +114,7 @@ func matarProceso(w http.ResponseWriter, req *http.Request) {
 	valor.Pid = params["id"]
 	
         cmd := exec.Command("sudo -9 kill "+valor.Pid)
-	stdout, err := cmd.Output()
+	_, err := cmd.Output()
         //_, err := exec.Command("sh", "-c", "sudo -9 kill "+valor.Pid).Output()
 	if err != nil {
 		fmt.Printf("Error matando el proceso: %v", err)
