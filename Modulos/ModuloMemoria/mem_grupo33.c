@@ -28,7 +28,7 @@ static int escribir_archivo(struct seq_file * archivo, void *v) {
     seq_printf(archivo, "                   \"Porcentaje_en_uso\":%i\n", (memoria_utilizada * 100)/total_memoria);
     seq_printf(archivo, "               }");
     seq_printf(archivo, "       ]\n");
-    seq_printf(archivo, "}\n]\n");
+    seq_printf(archivo, "}\n");
     return 0;
 }
 
